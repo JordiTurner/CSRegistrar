@@ -1,11 +1,11 @@
 # CSRegistrar
 
-Welcome to CSRegistrar
+## Welcome to CSRegistrar
 
 CSRegistrar is a MEAN-stack website that optimizes the availability of CS courses, using student class schedules.
 Created by Jordi E. Turner
 
--- To setup CSRegistrar --  
+## To setup CSRegistrar
 
 Use MEAN Tutorial to write this
 
@@ -15,12 +15,13 @@ Use MEAN Tutorial to write this
  - Install MongoDB - website?
  - Change path for MongoDB
 
--- To run CSRegistrar --  
+## To run CSRegistrar  
 
-1 - Run mongod from Terminal 
-2 - In a new shell, cd to CSRegistrar directory
-3 - Run node app.js
-4 - Visit http://localhost:3000
+ - Run mongod from Terminal 
+ - In a new shell, cd to CSRegistrar directory
+ - Run node app.js
+ - Visit http://localhost:3000
 
+## License
 
--Jordi E. Turner
+    Copyright [2016] [Jordi E. Turner]
