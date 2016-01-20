@@ -18,7 +18,7 @@ Use MEAN Tutorial to write this
 -- To run CSRegistrar --  
 
 1 - Run mongod from Terminal 
-2 - In a new shell, cd to CSApp
+2 - In a new shell, cd to CSRegistrar directory
 3 - Run node app.js
 4 - Visit http://localhost:3000
 
