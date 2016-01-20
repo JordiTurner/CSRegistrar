@@ -1,0 +1,421 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CS Registrar</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="app.js"></script>
+    <style> 
+        #leftcolumn {
+          background-color: white; 
+          width: 23%;
+          float:left;
+          padding: 10px 40px 10px 55px;
+          height:730px;
+          text-align: center;
+        }  
+        #centercolumn {
+          width:53%;
+          float:left;
+          margin-right: 1px;
+          padding: 10px;
+          height:730px;
+          outline: 1px solid grey;
+        }  
+        #rightcolumn {
+          background-color: white; 
+          width: 23%;
+          word-wrap: break-word;
+          float:left;
+          padding: 10px 40px 10px 40px;
+          height:730px;
+          text-align: center;
+        } 
+        #fullcolumn {
+          background-color: white; 
+          width: 100%;
+          float:left;
+          padding: 10px 40px 10px 40px;
+          height:730px;
+          text-align: center;
+        } 
+        #halfleftcolumn {
+          background-color: white; 
+          width: 49%;
+          word-wrap: break-word;
+          float:left;
+          padding: 10px 40px 10px 40px;
+          height:730px;
+          text-align: center;
+        }  
+        #halfrightcolumn {
+          background-color: white; 
+          width: 50%;
+          word-wrap: break-word;
+          float:left;
+          padding: 10px 40px 10px 40px;
+          height: 730px;
+          text-align: center;
+          outline: 1px solid grey;
+        }  
+        .mongoTables{
+          outline: 1px solid grey;
+          overflow-y: scroll;
+          text-align: left;
+          height: 500px;
+        }
+        #outputTable {
+            cursor: pointer;
+        }
+        .secondaryTitles{
+            text-align: center;
+            font-weight: bold;
+            font-size: 150%;
+        }
+        .courseListArea{
+          overflow-y: scroll;
+          text-align: left;
+          height:191px;
+          outline: 1px solid grey;
+        }
+        .IDListArea{
+          overflow-y: scroll;
+          text-align: left;
+          height:200px;
+          outline: 1px solid grey;
+          padding: 0;
+        }  
+        .UnavailableListArea{
+          overflow-y: scroll;
+          text-align: left;
+          height:100px;
+          padding: 0;
+        } 
+        tr {
+            font-size: 75%;
+        }
+        td {
+            font-size: 90%;
+        }
+        table, th, tr, td {
+            border: 1px solid grey !important;
+            border-collapse: collapse;
+            text-align: center !important;
+        }
+        #double li  {
+            float:left; 
+            width:50%;
+        } 
+        #triple li  {
+            float:left; 
+            width:33%;
+        }
+        .badge {
+            font-size: 80% !important;
+        }
+        .legendHundred{background-color: #C5F19A;}
+        .legendFilter1{background-color: #FEF5A8;}
+        .legendFilter2 {background-color: #F79494;}
+        .legendFilter3 {background-color: #D3D7CF;}
+        
+        #container {
+            text-align: center;
+            font-size: small;
+        }
+        .legendHundred, .legendFilter1, .legendFilter2, .legendFilter3 {
+            width: 20%;
+            vertical-align: top;
+            display: inline-block;
+            *display: inline;
+            zoom: 1
+        }
+        .navbar {
+            margin-bottom: 0 !important;
+        }
+    </style>
+</head>
+
+
+  <body ng-app="flapperNews">
+    <nav class="navbar navbar-inverse ">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/home">CSRegistrar</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/visual">Visual</a></li>
+                    <li><a href="#/insert">Insert Data</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/clear">Clear Data</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>  
+
+    <div class="row">
+        <div>
+            <ui-view></ui-view>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="/home.html">
+        <div id="fullcolumn">
+            <h1>Welcome to CSRegistrar</h1>
+            <br>
+            CSRegistrar is a MEAN-stack website that optimizes the availability of CS courses, using student class schedules.
+            <br>
+            <br>
+            <img src="http://all4desktop.com/data_images/original/4243942-bear.jpg" alt="A bear view" style="width:700px;height:450px;">
+            <hr>
+            <h6>Created by Jordi E. Turner</h6>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="/visual.html"> 
+
+        <div id="leftcolumn">
+
+            <!-- Course Availability -->
+            <div class="secondaryTitles">
+                Course Availability
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label>CS Course Number:</label>
+                    <input type="text" class="form-control input-group-lg" placeholder="Ex: 131" ng-model="CSSelect">
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="row">
+                <div class="form-group col-xs-6">
+                    <label>1st Filter:</label>
+                    <input class="form-control input-group-lg reg_name" type="text" placeholder="Ex: 90" ng-model="Filter1"/>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <label>2nd Filter:</label>
+                    <input class="form-control input-group-lg reg_name" type="text" placeholder="Ex: 75" ng-model="Filter2"/>
+                </div>
+            </div>
+
+            <button type="submit" id="submitCS" class="btn btn-primary" ng-click="CourseOutput(CSSelect,Filter1,Filter2);">Check Availabity</button>
+            <hr>
+
+            <!-- Student Availability -->
+            <div class="secondaryTitles">
+                Student Availability
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label>Student ID Number:</label>
+                    <input type="text" class="form-control input-group-lg" placeholder="Ex: 400001" ng-model="sIDSelect">
+                </div>
+            </div>                
+            <button type="submit" id="submitCS" class="btn btn-primary" ng-click="StudentOutput(sIDSelect);">Check Availabity</button>
+            <hr>
+
+            <!-- CS Courses List -->
+            <div class="secondaryTitles">
+                Listings
+            </div>
+            <h5>
+                <strong>
+                    Courses
+                </strong>
+            </h5>
+            <div class="courseListArea">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="course in CourseList">
+                            <span class="badge"> 
+                                {{course.courseStudents}} Students
+                            </span>
+                            {{course.courseName}}
+                        </li>
+                    </ul>
+            </div>
+        </div>
+
+        <div id="centercolumn">
+            <div class="secondaryTitles">
+                Visual Output{{OutputTitle}}
+            </div>
+            <br>
+
+            <div id="container">
+                Availability Legend:
+                <div class="legendHundred">100%</div>
+                <div class="legendFilter1">{{Filter1Legend}}</div>
+                <div class="legendFilter2">{{Filter2Legend}}</div>
+                <div class="legendFilter3">+0%</div>
+            </div>
+            <br>
+
+            <table id="outputTable" class="table table-bordered table-condensed">
+                    <tr>
+                        <th class="col-md-1">Monday</th>
+                        <th class="col-md-1">Tuesday</th>
+                        <th class="col-md-1">Wednesday</th>
+                        <th class="col-md-1">Thursday</th>
+                        <th class="col-md-1">Friday</th>
+                    </tr>
+                    <tr ng-repeat="timeItem in timeItems">
+                        <td ng-click="CellSelect($event)" id="M{{timeItem.id}}">{{timeItem.name}}</td>
+                        <td ng-click="CellSelect($event)" id="T{{timeItem.id}}">{{timeItem.name}}</td>
+                        <td ng-click="CellSelect($event)" id="W{{timeItem.id}}">{{timeItem.name}}</td>
+                        <td ng-click="CellSelect($event)" id="R{{timeItem.id}}">{{timeItem.name}}</td>
+                        <td ng-click="CellSelect($event)" id="F{{timeItem.id}}">{{timeItem.name}}</td>
+                    </tr>
+            </table>
+        </div>
+
+        <div id="rightcolumn">
+
+            
+            <!-- Data for output -->
+            <div class="secondaryTitles">
+                Data {{OutputTitle}}
+            </div>
+
+            <!-- Student IDs List -->
+            <h5><strong>{{CourseOrStudentsList}}</strong></h5>
+            <div class="IDListArea">
+                <ul id="triple">
+                    <li ng-repeat="student in CourseStudentsList ">
+                        {{student}}
+                    </li>
+                </ul>
+            </div>
+            <hr>
+
+            <div class="secondaryTitles">
+                Timeslot Information
+            </div>
+
+            <strong>Time Selected:</strong>
+            <br>
+            {{CellInfoSelectedTimeslot}}
+            <br><br>
+            <strong>{{PercentageUnavailableTitle}}</strong>
+            <br>
+            {{CellInfoPercentUnavailable}}
+            <br><br>
+            <strong>{{UnavailableIDsTitle}}</strong>
+            <br>
+            <div class="UnavailableListArea">
+                <ul id="triple">
+                    <li ng-repeat="unavailableId in CellInfoUnavailableStudents">{{unavailableId}}</li>
+                </ul>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="/insert.html">        
+        <div id="halfleftcolumn">
+            <!--Add student(s) manually-->
+            <form ng-submit="addManyStudents(true,massStudentText)"
+                style="margin-top:30px">
+                <h3>Add student(s):</h3><br>
+                Example: 
+                ID400001~ClassE37-100,ClassE37-200,ClassE37-3111,ClassE37-400N,ClassL33-100~131-CS,132-CS,330S;
+                ID400002~ClassE37-100,ClassL24-100,ClassE35-200,ClassF20-200,ClassF20-400N~131-CS,330S-CS;
+                <br><br>
+                <div class="form-group">
+                    <label >Mass Student Input:</label><br>
+                    <textarea class="form-control" rows="10" id="MassStudentInput" ng-model="massStudentText"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Student(s)</button>
+            </form>
+            <hr>
+
+            <!--Add example student(s)-->
+            <form ng-submit="addManyStudents(false,0)"
+                style="margin-top:30px">
+                <h4>Add an example list of students</h4>
+                <br>
+                <button type="submit" class="btn btn-primary">Add Example Students</button>
+            </form>
+        </div>
+        <div id="halfrightcolumn">
+
+            <!--Add course(s) manually-->
+            <form ng-submit="addCourses(true,massCourseText)"
+                style="margin-top:30px">
+                <h3>Add course(s):</h3><br>
+                Example: 
+                E37-100~M09.0,M09.5,W09.0,W09.5,F09.0,F09.5,M10.0,M10.5,W10.0,W10.5,F10.0,F10.5;
+                E37-200~M11.0,M11.5,W11.0,W11.5,F11.0,F11.5,M12.0,M12.5,W12.0,W12.5,F12.0,F12.5;
+                E37-3111~M13.0,M13.5,W13.0,W13.5,F13.0,F13.5,M14.0,M14.5,W14.0,W14.5,F14.0,F14.5;
+
+                <br><br>
+                <div class="form-group">
+                    <label >Mass Course Input:</label><br>
+                    <textarea class="form-control" rows="10" id="MassCourseInput" ng-model="massCourseText"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Course(s)</button>
+            </form>
+            <hr>
+
+            <!--Add example course(s)-->
+            <form ng-submit="addCourses(false,0)"
+                style="margin-top:30px">
+                <h4>Add an example list of courses:</h4>
+                <br>
+                <button type="submit" class="btn btn-primary">Add Example Courses</button>
+            </form>
+
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="/clear.html">
+        <div id="halfleftcolumn">
+            <form ng-submit="deleteStudents()"
+                style="margin-top:30px">
+                <h3>Clear StudentTable:</h3>
+                <button type="submit" class="btn btn-primary">Clear</button>
+            </form>
+            <br>
+            <strong>Student Table - MongoDb</strong>
+            <br><br>
+            <div class="mongoTables">
+                <ul>
+                    <li ng-repeat="studentInfo in StudentTable.students">Student ID: {{studentInfo.sID}}<br>Registered Courses: {{studentInfo.Courses}}<br>CS Courses: {{studentInfo.csCourses}}</li>
+                </ul>
+            </div>
+        </div>
+        <div id="halfrightcolumn">
+            <form ng-submit="deleteCourses()"
+                style="margin-top:30px">
+                <h3>Clear CourseTable:</h3>
+                <button type="submit" class="btn btn-primary">Clear</button>
+            </form>
+            <br>
+            <strong>Course Table - MongoDb</strong>
+            <br><br>
+            <div class="mongoTables">
+                <ul>
+                    <li ng-repeat="courseInfo in CourseTable.courses">Course ID: {{courseInfo.courseID}}<br>Course Times: {{courseInfo.courseTimes}}</li>
+                </ul>
+            </div>
+        </div>
+    </script>
+
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">          
+    <script src= "bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src= "bower_components/angular-bootstrap/ui-bootstrap.min.js" type="text/javascript"></script>
+    <script src= "bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+  </body>
+</html>
