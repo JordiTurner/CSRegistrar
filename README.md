@@ -24,4 +24,4 @@ Use MEAN Tutorial to write this
 
 ## License
 
-    Copyright [2016] [Jordi E. Turner]
+    Copyright 2016 Jordi E. Turner
