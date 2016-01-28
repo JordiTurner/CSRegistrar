@@ -1,6 +1,6 @@
 # CSRegistrar
 
-CSRegistrar is a MEAN-stack website that optimizes the availability of CS courses, using student class schedules.
+CSRegistrar is a MEAN-stack web application that optimizes the availability of CS courses, using student class schedules.
 Created by Jordi E. Turner
 
 ## To setup CSRegistrar
